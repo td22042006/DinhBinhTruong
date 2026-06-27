@@ -27,43 +27,30 @@ const HotspotModal = {
     this.modalEl.querySelector('.hotspot-modal-overlay')?.addEventListener('click', () => this.close());
     document.addEventListener('keydown', e => { if (e.key === 'Escape') this.close(); });
 
-    // Tab handlers
-    this.modalEl.querySelectorAll('.hotspot-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const lang = tab.dataset.lang;
-        if (lang && this.currentArea) {
-          // Update active tab
-          this.modalEl.querySelectorAll('.hotspot-tab').forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-          // Update content
-          const data = this.currentArea[lang];
-          if (data) {
-            document.getElementById('hotspot-modal-title').textContent = data.name;
-            document.getElementById('hotspot-modal-desc').textContent = data.desc;
-            document.getElementById('hotspot-audio-name').textContent = 'Audio Guide: ' + data.name;
-          }
-        }
-      });
-    });
-
     // Audio play
     document.getElementById('hotspot-audio-play')?.addEventListener('click', () => {
       this.toggleAudio();
+    });
+
+    // Listen to global language changes
+    document.addEventListener('langchange', () => {
+      if (this.currentArea && this.modalEl.classList.contains('open')) {
+        this.updateContent();
+      }
     });
 
     // Expose globally for Three.js module
     window.openHotspotModal = (area) => this.open(area);
   },
 
-  open(area) {
-    if (!this.modalEl || !area) return;
-    this.currentArea = area;
-
+  updateContent() {
+    if (!this.currentArea) return;
     const lang = i18n.current;
-    const data = area[lang];
+    const data = this.currentArea[lang];
+    if (!data) return;
 
     // Set image
-    const imgSrc = HOTSPOT_IMAGES[area.id] || 'images/hotspots/cong-tam-quan.png';
+    const imgSrc = HOTSPOT_IMAGES[this.currentArea.id] || 'images/hotspots/cong-tam-quan.png';
     document.getElementById('hotspot-modal-img').src = imgSrc;
     document.getElementById('hotspot-modal-img').alt = data.name;
 
@@ -71,17 +58,19 @@ const HotspotModal = {
     document.getElementById('hotspot-modal-title').textContent = data.name;
     document.getElementById('hotspot-modal-desc').textContent = data.desc;
     document.getElementById('hotspot-audio-name').textContent = 'Audio Guide: ' + data.name;
-    document.getElementById('hotspot-audio-dur').textContent = 'Thời lượng: 02:18';
+    document.getElementById('hotspot-audio-dur').textContent = lang === 'vi' ? 'Thời lượng: 02:18' : 'Duration: 02:18';
 
     // Set audio source
     if (this.audioEl) {
       this.audioEl.src = data.audio || '';
     }
+  },
 
-    // Update active tab
-    this.modalEl.querySelectorAll('.hotspot-tab').forEach(t => {
-      t.classList.toggle('active', t.dataset.lang === lang);
-    });
+  open(area) {
+    if (!this.modalEl || !area) return;
+    this.currentArea = area;
+
+    this.updateContent();
 
     // Show modal
     this.modalEl.classList.add('open');
@@ -137,27 +126,6 @@ const HotspotModal = {
   }
 };
 
-// ===== Language Tabs (History section) =====
-const LangTabs = {
-  init() {
-    document.querySelectorAll('.lang-tabs .lang-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const lang = tab.dataset.lang;
-        if (lang) {
-          i18n.set(lang);
-          // Update active tabs
-          document.querySelectorAll('.lang-tabs .lang-tab').forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-          // Also sync hotspot modal tabs
-          document.querySelectorAll('.hotspot-tab').forEach(t => {
-            t.classList.toggle('active', t.dataset.lang === lang);
-          });
-        }
-      });
-    });
-  }
-};
-
 // ===== Timeline =====
 const Timeline = {
   init() {
@@ -190,7 +158,6 @@ const App = {
   init() {
     i18n.init();
     HotspotModal.init();
-    LangTabs.init();
     Timeline.init();
     this.initNav();
     this.initScrollReveal();
