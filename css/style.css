@@ -141,7 +141,7 @@ h3 { font-size: clamp(1.2rem, 3vw, 1.6rem); }
 }
 .quick-info-grid {
   display: grid;
-  grid-template-columns: 440px 1fr;
+  grid-template-columns: 480px 1fr;
   gap: 32px;
   align-items: start;
 }
@@ -165,24 +165,24 @@ h3 { font-size: clamp(1.2rem, 3vw, 1.6rem); }
   border-bottom: 1px solid var(--border);
 }
 .info-row {
-  display: flex; gap: 16px;
-  padding: 10px 0;
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 16px;
+  padding: 12px 0;
   border-bottom: 1px solid #f0ebe0;
   align-items: flex-start;
 }
 .info-row:last-child { border-bottom: none; }
 .info-label {
   font-size: 0.68rem; font-weight: 700;
-  letter-spacing: 0.1em; text-transform: uppercase;
+  letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--accent-gold-dark);
-  min-width: 85px; flex-shrink: 0;
   padding-top: 2px;
 }
 .info-value {
   font-size: 0.88rem; color: var(--text-primary);
   line-height: 1.5;
 }
-.info-value::before { content: '•  '; color: var(--accent-gold); font-weight: bold; }
 
 /* Festival mini card */
 .festival-mini-card {
@@ -733,8 +733,7 @@ footer {
   .timeline-item { grid-template-columns: 52px 32px 1fr; }
   .timeline-year { font-size: 0.75rem; padding-right: 10px; }
   .container { padding: 0 8px; }
-  .info-row { flex-direction: column; gap: 4px; align-items: flex-start; }
-  .info-label { min-width: unset; }
+  .info-row { grid-template-columns: 1fr; gap: 4px; }
   .photo-gallery { grid-template-columns: 1fr; }
   .photo-gallery img { height: 180px; }
   .photo-gallery img:first-child { height: 200px; }
