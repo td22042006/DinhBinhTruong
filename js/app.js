@@ -32,6 +32,11 @@ const HotspotModal = {
       this.toggleAudio();
     });
 
+    // Detail expand button handler
+    document.getElementById('hotspot-detail-btn')?.addEventListener('click', () => {
+      this.toggleDetail();
+    });
+
     // Listen to global language changes
     document.addEventListener('langchange', () => {
       if (this.currentArea && this.modalEl.classList.contains('open')) {
@@ -50,7 +55,7 @@ const HotspotModal = {
     if (!data) return;
 
     // Set image
-    const imgSrc = HOTSPOT_IMAGES[this.currentArea.id] || 'images/hotspots/cong-tam-quan.png';
+    const imgSrc = HOTSPOT_IMAGES[this.currentArea.id] || 'images/gallery/gallery-5.jpg';
     document.getElementById('hotspot-modal-img').src = imgSrc;
     document.getElementById('hotspot-modal-img').alt = data.name;
 
@@ -60,15 +65,32 @@ const HotspotModal = {
     document.getElementById('hotspot-audio-name').textContent = 'Audio Guide: ' + data.name;
     document.getElementById('hotspot-audio-dur').textContent = lang === 'vi' ? 'Thời lượng: 02:18' : 'Duration: 02:18';
 
+    // Set architectural detail content
+    const detailBox = document.getElementById('hotspot-modal-detail-box');
+    if (detailBox) {
+      detailBox.textContent = data.details || (lang === 'vi' ? 'Chưa có chi tiết kiến trúc bổ sung.' : 'No additional architectural details available.');
+    }
+
     // Set audio source
     if (this.audioEl) {
       this.audioEl.src = data.audio || '';
     }
   },
 
+  toggleDetail() {
+    const detailBox = document.getElementById('hotspot-modal-detail-box');
+    if (detailBox) {
+      detailBox.classList.toggle('hidden');
+    }
+  },
+
   open(area) {
     if (!this.modalEl || !area) return;
     this.currentArea = area;
+
+    // Hide detail box by default when opening
+    const detailBox = document.getElementById('hotspot-modal-detail-box');
+    if (detailBox) detailBox.classList.add('hidden');
 
     this.updateContent();
 
