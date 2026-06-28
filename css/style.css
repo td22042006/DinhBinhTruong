@@ -399,49 +399,28 @@ h3 { font-size: clamp(1.2rem, 3vw, 1.6rem); }
   transition: width 0.5s linear;
 }
 
-/* Visit Info Section */
-#visit-info-section {
-  padding: 60px 0;
-  background: var(--bg-secondary);
-}
-.visit-info-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-top: 32px;
-}
-.visit-card {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+/* Visit Info Card (Đặt ngay dưới thẻ Lễ Hội) */
+.visit-info-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: 24px;
+  padding: 20px 24px;
   box-shadow: var(--shadow-sm);
-  transition: var(--transition);
 }
-.visit-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
+.visit-info-header {
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent-gold-dark);
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
 }
-.visit-card-icon {
-  font-size: 2rem;
-  width: 54px; height: 54px;
-  background: var(--accent-gold)15;
-  border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
+.visit-info-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 0;
+  font-size: 0.88rem; color: var(--text-secondary);
 }
-.visit-card-content h4 {
-  font-size: 0.95rem;
-  color: var(--text-primary);
-  margin-bottom: 4px;
-}
-.visit-card-content p {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-}
+.visit-icon { font-size: 1.1rem; flex-shrink: 0; }
 
 /* Photo Gallery Section */
 .gallery-section {
@@ -769,7 +748,6 @@ footer {
   .model-3d-wrapper { aspect-ratio: 16/10; }
   .history-grid { grid-template-columns: 1fr; }
   .festival-grid { grid-template-columns: repeat(2, 1fr); }
-  .visit-info-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   #timeline-container::before { left: 90px; }
   .timeline-item { grid-template-columns: 70px 40px 1fr; }
@@ -781,7 +759,6 @@ footer {
   .quick-info-grid { gap: 20px; }
   .model-3d-wrapper { aspect-ratio: 4/3; }
   .festival-grid { grid-template-columns: 1fr; }
-  .visit-info-grid { grid-template-columns: 1fr; gap: 14px; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
   .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
   #timeline-container::before { left: 70px; }
