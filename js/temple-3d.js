@@ -412,15 +412,15 @@ const Temple3D = {
   buildCourtyard() {
     const C = this.COLORS;
 
-    // 1. Hồ Thuỷ Tạ (Semi-circular pond aligned to the upper left wall at x=-18.9, z=-9)
+    // 1. Hồ Thuỷ Tạ (Semi-circular pond inside the fence behind Miếu thờ and Bình phong at x=-18.9, z=-1.0)
     const pondShape = new THREE.Shape();
     pondShape.absarc(0, 0, 2.5, 0, Math.PI, false);
     pondShape.lineTo(2.5, 0); // Close shape
     const pondGeo = new THREE.ShapeGeometry(pondShape);
     const pond = new THREE.Mesh(pondGeo, this.mat(0x33A0FF, { roughness: 0.1, metalness: 0.8 }));
     pond.rotation.x = -Math.PI / 2;
-    pond.rotation.z = Math.PI / 2; // Flat edge along the vertical left wall (x = -19)
-    pond.position.set(-18.9, 0.03, -9.0);
+    pond.rotation.z = -Math.PI / 2; // Flat edge along the left fence (x = -19) curving inwards to the right
+    pond.position.set(-18.9, 0.03, -1.0);
     this.scene.add(pond);
 
     // Pond stone border
@@ -430,41 +430,41 @@ const Temple3D = {
     const borderExtrude = new THREE.ExtrudeGeometry(borderShape, { depth: 0.25, bevelEnabled: false });
     const border = new THREE.Mesh(borderExtrude, this.mat(C.stoneGray));
     border.rotation.x = -Math.PI / 2;
-    border.rotation.z = Math.PI / 2;
-    border.position.set(-18.9, 0.03, -9.0);
+    border.rotation.z = -Math.PI / 2;
+    border.position.set(-18.9, 0.03, -1.0);
     this.scene.add(border);
 
-    // 2. Sân Khấu Ngoài Trời (Outdoor Stage)
+    // 2. Sân Khấu Ngoài Trời (Outdoor Stage) - Aligned vertically with Bia Tưởng Niệm at x = -13.5
     // Stage base
-    this.scene.add(this.createBox(4.0, 0.4, 3.0, C.stoneGray, -8.0, 0.2, -12.0));
+    this.scene.add(this.createBox(4.0, 0.4, 3.0, C.stoneGray, -13.5, 0.2, -12.5));
     // Stage back wall (simple wooden screen)
-    this.scene.add(this.createBox(4.0, 2.0, 0.15, C.columnRed, -8.0, 1.4, -13.4));
+    this.scene.add(this.createBox(4.0, 2.0, 0.15, C.columnRed, -13.5, 1.4, -13.9));
     // Stage roof
-    const stageRoof = this.createRoof(4.4, 3.4, 0.6, 0.2, C.roofRed, -8.0, 2.4, -12.0);
+    const stageRoof = this.createRoof(4.4, 3.4, 0.6, 0.2, C.roofRed, -13.5, 2.4, -12.5);
     this.scene.add(stageRoof);
 
-    // 3. Bia Tưởng Niệm (Memorial Stele)
-    this.scene.add(this.createBox(0.8, 0.2, 1.0, C.stoneGray, -13.5, 0.1, -12.0));
-    this.scene.add(this.createBox(0.2, 1.4, 0.6, C.stoneGray, -13.5, 0.8, -12.0));
-    this.scene.add(this.createBox(0.22, 0.8, 0.4, C.goldAccent, -13.5, 0.8, -12.0, { metalness: 0.3 }));
+    // 3. Bia Tưởng Niệm (Memorial Stele) - Aligned vertically at x = -13.5
+    this.scene.add(this.createBox(0.8, 0.2, 1.0, C.stoneGray, -13.5, 0.1, -7.5));
+    this.scene.add(this.createBox(0.2, 1.4, 0.6, C.stoneGray, -13.5, 0.8, -7.5));
+    this.scene.add(this.createBox(0.22, 0.8, 0.4, C.goldAccent, -13.5, 0.8, -7.5, { metalness: 0.3 }));
 
-    // 4. Miếu Thờ 1
-    this.scene.add(this.createBox(1.0, 0.2, 1.0, C.stoneGray, -13.5, 0.1, -7.0));
-    this.scene.add(this.createBox(0.8, 1.2, 0.8, C.wallYellow, -13.5, 0.7, -7.0));
-    const sRoof1 = this.createRoof(1.0, 1.0, 0.5, 0.1, C.roofRed, -13.5, 1.3, -7.0);
+    // 4. Miếu Thờ 1 - Aligned vertically at x = -13.5
+    this.scene.add(this.createBox(1.0, 0.2, 1.0, C.stoneGray, -13.5, 0.1, -3.0));
+    this.scene.add(this.createBox(0.8, 1.2, 0.8, C.wallYellow, -13.5, 0.7, -3.0));
+    const sRoof1 = this.createRoof(1.0, 1.0, 0.5, 0.1, C.roofRed, -13.5, 1.3, -3.0);
     this.scene.add(sRoof1);
 
-    // 5. Bình Phong (Screen wall)
-    this.scene.add(this.createBox(0.25, 1.8, 3.0, C.wallYellow, -13.5, 0.9, -2.0));
-    this.scene.add(this.createBox(0.5, 0.15, 3.4, C.stoneGray, -13.5, 0.075, -2.0)); // base
-    const bpRoof = this.createRoof(0.4, 3.2, 0.4, 0.1, C.roofRed, -13.5, 1.8, -2.0);
+    // 5. Bình Phong (Screen wall) - Aligned vertically at x = -13.5
+    this.scene.add(this.createBox(0.25, 1.8, 3.0, C.wallYellow, -13.5, 0.9, 1.5));
+    this.scene.add(this.createBox(0.5, 0.15, 3.4, C.stoneGray, -13.5, 0.075, 1.5)); // base
+    const bpRoof = this.createRoof(0.4, 3.2, 0.4, 0.1, C.roofRed, -13.5, 1.8, 1.5);
     bpRoof.rotation.y = Math.PI / 2; // Rotate so ridge is parallel to Z
     this.scene.add(bpRoof);
 
-    // 6. Miếu Thờ 2
-    this.scene.add(this.createBox(1.0, 0.2, 1.0, C.stoneGray, -13.5, 0.1, 3.0));
-    this.scene.add(this.createBox(0.8, 1.2, 0.8, C.wallYellow, -13.5, 0.7, 3.0));
-    const sRoof2 = this.createRoof(1.0, 1.0, 0.5, 0.1, C.roofRed, -13.5, 1.3, 3.0);
+    // 6. Miếu Thờ 2 - Aligned vertically at x = -13.5
+    this.scene.add(this.createBox(1.0, 0.2, 1.0, C.stoneGray, -13.5, 0.1, 6.0));
+    this.scene.add(this.createBox(0.8, 1.2, 0.8, C.wallYellow, -13.5, 0.7, 6.0));
+    const sRoof2 = this.createRoof(1.0, 1.0, 0.5, 0.1, C.roofRed, -13.5, 1.3, 6.0);
     this.scene.add(sRoof2);
 
     // 7. Bia Di Tích Kiến Trúc Nghệ Thuật (Historic Stele in the yard)
@@ -670,13 +670,13 @@ const Temple3D = {
       'tien-dien':            { x: 4.5,   y: 4.5, z: -4.0 },
       'chanh-dien':           { x: 9.5,   y: 6.0, z: -4.0 },
       'nha-hoi':              { x: 13.5,  y: 4.5, z: -4.0 },
-      'ho-thuy-ta':           { x: -18.5, y: 1.5, z: -9.0 },
-      'san-khau-ngoai-troi':  { x: -8.0,  y: 3.5, z: -12.0 },
-      'bia-tuong-niem':       { x: -13.5, y: 2.2, z: -12.0 },
+      'ho-thuy-ta':           { x: -16.5, y: 1.5, z: -1.0 },
+      'san-khau-ngoai-troi':  { x: -13.5, y: 3.5, z: -12.5 },
+      'bia-tuong-niem':       { x: -13.5, y: 2.2, z: -7.5 },
       'bia-di-tich':          { x: -4.0,  y: 3.2, z: 6.0 },
-      'mieu-tho-1':           { x: -13.5, y: 2.5, z: -7.0 },
-      'binh-phong':           { x: -13.5, y: 3.0, z: -2.0 },
-      'mieu-tho-2':           { x: -13.5, y: 2.5, z: 3.0 },
+      'mieu-tho-1':           { x: -13.5, y: 2.5, z: -3.0 },
+      'binh-phong':           { x: -13.5, y: 3.0, z: 1.5 },
+      'mieu-tho-2':           { x: -13.5, y: 2.5, z: 6.0 },
     };
 
     // Create 3D marker meshes for raycasting
