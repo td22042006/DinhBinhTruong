@@ -16,11 +16,11 @@ const Temple3D = {
 
   // Colors from real photos
   COLORS: {
-    wallYellow:    0xD4A830,
-    wallYellowLight: 0xE8C840,
-    roofBrown:     0x6B3030,
-    roofRed:       0x8B4040,
-    roofDark:      0x5A2828,
+    wallYellow:    0xDFCA88, // Soft pale yellow from the photo
+    wallYellowLight: 0xEAD8A3, // Light cream-yellow
+    roofBrown:     0x7E3D30, // Terracotta tile brown/red
+    roofRed:       0x8A4B38, // Terracotta red
+    roofDark:      0x5E2B20,
     columnRed:     0x8B2222,
     columnDarkRed: 0x6B1818,
     woodBrown:     0x6B4010,
@@ -29,8 +29,8 @@ const Temple3D = {
     goldDark:      0xA08530,
     groundPave:    0xB8A898,
     groundDark:    0x9E8E7E,
-    fenceYellow:   0xD4A830,
-    fenceBars:     0xC9A84C,
+    fenceYellow:   0xDFCA88,
+    fenceBars:     0x4E463F, // Dark bronze/iron bars from the photo
     greenTree:     0x4A6B30,
     greenDark:     0x3A5520,
     grassGreen:    0x6B8B45,
@@ -335,16 +335,41 @@ const Temple3D = {
     pillarPositions.forEach(([x, z]) => {
       const pillar = this.createBox(0.5, pillarH, 0.5, C.wallYellowLight, x, pillarH/2, z);
       this.scene.add(pillar);
-      const cap = this.createBox(0.6, 0.15, 0.6, C.goldAccent, x, pillarH + 0.075, z, { metalness: 0.3 });
+      // White pillar cap (matching the photo)
+      const cap = this.createBox(0.6, 0.15, 0.6, 0xF0EDE5, x, pillarH + 0.075, z);
       this.scene.add(cap);
     });
 
-    // Decorative metal fence bars (simplified as thin lines) along front walls
+    // Horizontal top rail along front wall segments
+    this.scene.add(this.createBox(12.3, 0.08, 0.12, C.fenceBars, -1.85, fenceH + 0.04, 16.0, { metalness: 0.5 }));
+    this.scene.add(this.createBox(15.3, 0.08, 0.12, C.fenceBars, 14.35, fenceH + 0.04, 16.0, { metalness: 0.5 }));
+
+    // Decorative metal fence bars (dark iron) along front walls
     for (let x = -7.4; x <= 3.8; x += 0.6) {
       this.scene.add(this.createBox(0.05, 0.9, 0.05, C.fenceBars, x, 0.65, 16.0, { metalness: 0.5 }));
     }
     for (let x = 7.4; x <= 21.4; x += 0.6) {
       this.scene.add(this.createBox(0.05, 0.9, 0.05, C.fenceBars, x, 0.65, 16.0, { metalness: 0.5 }));
+    }
+
+    // Fence bars along right wall (x = 22)
+    for (let z = -15.5; z <= 15.5; z += 0.6) {
+      this.scene.add(this.createBox(0.05, 0.9, 0.05, C.fenceBars, 22.0, 0.65, z, { metalness: 0.5 }));
+    }
+
+    // Fence bars along back wall (z = -16)
+    for (let x = -21.5; x <= 21.5; x += 0.6) {
+      this.scene.add(this.createBox(0.05, 0.9, 0.05, C.fenceBars, x, 0.65, -16.0, { metalness: 0.5 }));
+    }
+
+    // Fence bars along left wall segment 1 (x = -15)
+    for (let z = 4.5; z <= 15.5; z += 0.6) {
+      this.scene.add(this.createBox(0.05, 0.9, 0.05, C.fenceBars, -15.0, 0.65, z, { metalness: 0.5 }));
+    }
+
+    // Fence bars along left wall segment 2 (x = -22)
+    for (let z = -15.5; z <= -2.5; z += 0.6) {
+      this.scene.add(this.createBox(0.05, 0.9, 0.05, C.fenceBars, -22.0, 0.65, z, { metalness: 0.5 }));
     }
   },
 
