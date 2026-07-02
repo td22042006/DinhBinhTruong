@@ -526,17 +526,17 @@ const Temple3D = {
     const sRoof2 = this.createRoof(1.4, 1.4, 0.6, 0.1, C.roofRed, m2x, 1.4, m2z);
     this.scene.add(sRoof2);
 
-    // 7. Bia Di Tích Kiến Trúc Nghệ Thuật (Stepped granite stele matching the photo, facing East/+x)
+    // 7. Bia Di Tích Kiến Trúc Nghệ Thuật (Stepped granite stele matching the photo, facing Back/-z)
     const bx = -4.0, bz = 6.0;
     // Granite base/pedestal
-    this.scene.add(this.createBox(0.6, 0.25, 1.6, 0x8B7D7A, bx, 0.125, bz));
+    this.scene.add(this.createBox(1.6, 0.25, 0.6, 0x8B7D7A, bx, 0.125, bz));
     // Main pillar body (pinkish-brown granite color)
-    this.scene.add(this.createBox(0.4, 1.8, 1.2, 0xC89E88, bx, 1.15, bz, { roughness: 0.7 }));
-    // Black inscription plaque on the right face (+x side)
-    this.scene.add(this.createBox(0.05, 1.4, 0.9, 0x222222, bx + 0.21, 1.15, bz, { roughness: 0.2 }));
+    this.scene.add(this.createBox(1.2, 1.8, 0.4, 0xC89E88, bx, 1.15, bz, { roughness: 0.7 }));
+    // Black inscription plaque on the back face (-z side)
+    this.scene.add(this.createBox(0.9, 1.4, 0.05, 0x222222, bx, 1.15, bz - 0.21, { roughness: 0.2 }));
     // Stepped top layers
-    this.scene.add(this.createBox(0.4, 0.15, 1.0, 0xC89E88, bx, 2.125, bz));
-    this.scene.add(this.createBox(0.4, 0.15, 0.8, 0xC89E88, bx, 2.275, bz));
+    this.scene.add(this.createBox(1.0, 0.15, 0.4, 0xC89E88, bx, 2.125, bz));
+    this.scene.add(this.createBox(0.8, 0.15, 0.4, 0xC89E88, bx, 2.275, bz));
 
     // Pathway from Cổng Tam Quan to the main temple courtyard
     const pathGeo = new THREE.PlaneGeometry(4, 12);

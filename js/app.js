@@ -1,18 +1,16 @@
-// ===== Hotspot images mapping =====
 const HOTSPOT_IMAGES = {
-  'cong-tam-quan':        'images/gallery/gallery-5.jpg',
-  'cong-nho':             'images/gallery/gallery-9.jpg',
-  'nha-vo-ca':            'images/gallery/gallery-7.jpg',
-  'tien-dien':            'images/gallery/gallery-7.jpg',
-  'chanh-dien':           'images/gallery/gallery-8.png',
-  'nha-hoi':              'images/gallery/gallery-9.jpg',
-  'ho-thuy-ta':           'images/gallery/gallery-9.jpg',
-  'san-khau-ngoai-troi':  'images/gallery/gallery-7.jpg',
-  'bia-tuong-niem':       'images/gallery/gallery-5.jpg',
-  'bia-di-tich':          'images/gallery/gallery-5.jpg',
-  'mieu-tho-1':           'images/gallery/gallery-6.png',
-  'binh-phong':           'images/gallery/gallery-6.png',
-  'mieu-tho-2':           'images/gallery/gallery-6.png',
+  'cong-tam-quan':        'images/real/cong_tam_quan_real.png',
+  'nha-vo-ca':            'images/real/outside_real.png',
+  'tien-dien':            'images/real/outside_real.png',
+  'chanh-dien':           'images/real/inside_real.png',
+  'nha-hoi':              'images/real/outside_real.png',
+  'ho-thuy-ta':           'images/real/outside_real.png',
+  'san-khau-ngoai-troi':  'images/real/outside_real.png',
+  'bia-tuong-niem':       'images/real/bia_tuong_niem_real.jpg',
+  'bia-di-tich':          'images/real/cong_tam_quan_real.png',
+  'mieu-tho-1':           'images/real/mieu_tho_real.jpg',
+  'binh-phong':           'images/real/binh_phong_real.jpg',
+  'mieu-tho-2':           'images/real/mieu_tho_real.jpg',
 };
 
 // ===== Hotspot Modal =====
